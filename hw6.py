@@ -20,7 +20,7 @@
 
 class Patient:
     
-    def __init__(self, name, symptoms):
+    def __init__(self, name:str, symptoms:list):
         self.name = name
         self.symptoms = symptoms
 
@@ -33,7 +33,7 @@ class Patient:
 #
 # This information should be stored somehow.
     
-    def add_test(self, test, results):
+    def add_test(self, test:str, results:bool):
         self.test = test
         self.results = results
 
