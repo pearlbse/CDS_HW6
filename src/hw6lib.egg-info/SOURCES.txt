@@ -1,5 +1,0 @@
-setup.py
-hw6lib.egg-info/PKG-INFO
-hw6lib.egg-info/SOURCES.txt
-hw6lib.egg-info/dependency_links.txt
-hw6lib.egg-info/top_level.txt

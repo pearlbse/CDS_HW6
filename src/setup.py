@@ -19,12 +19,12 @@ def get_requirements(requirements_path='requirements.txt'):
 # or you can create a variable called __version__ inside the __init__.py from
 # the src/your_library folder that has a string with the version as a string.
 setup(
-    name='hw6lib',
+    name='classfunc',
     version='1.0',
     description='Learn how to use libraries with classes!',
     author='',
     packages=find_packages(where='classfunc', exclude=['tests']),
-    package_dir={'learnlibs': 'classfunc'},
+    package_dir={'classfunc': 'classfunc'},
     install_requires=get_requirements(),
     setup_requires=['pytest-runner', 'wheel'],
     url='',
