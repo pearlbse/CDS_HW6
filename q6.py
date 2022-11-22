@@ -107,4 +107,50 @@ class fill_nan:
             '''
             
             self.df[cols] = self.df[cols].fillna(self.df.mean().iloc[0])
-            
+
+
+#Part D
+# #%%
+
+# from sklearn.datasets import load_iris
+# import pandas as pd
+
+# data = load_iris()
+# df = pd.DataFrame(data=data.data, columns=data.feature_names)
+# df.head()
+# #%%
+# obj=StandardScaler()
+# df[['sepal length (cm)','petal width (cm)']].apply(lambda x:pd.DataFrame(obj.fit_transform(x).reshape(-1,1)))
+
+
+
+#%%
+from abc import ABC, abstractmethod
+import numpy
+from sklearn.preprocessing import StandardScaler 
+class feature_transform(ABC):
+
+    def __init__(self,df,cols:list) -> None:
+         self.df=df
+         self.cols=cols
+    
+    @abstractmethod
+    def apply_transform(self):
+        pass
+
+class log_transform(feature_transform):
+
+    def apply_transform(self):
+        self.df[cols]=self.df[cols].apply(lambda x: np.log(x))
+    
+class reverse_log(feature_transform):
+    def apply_transform(self):
+        obj=StandardScaler()
+        self.df[cols]=self.df[cols].apply(lambda x: np.exp(x))
+
+
+
+        
+
+
+#%%
