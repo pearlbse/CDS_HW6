@@ -141,12 +141,12 @@ class feature_transform(ABC):
 class log_transform(feature_transform):
 
     def apply_transform(self):
-        self.df[cols]=self.df[cols].apply(lambda x: np.log(x))
+        self.df[self.cols]=self.df[self.cols].apply(lambda x: np.log(x))
     
 class reverse_log(feature_transform):
     def apply_transform(self):
         obj=StandardScaler()
-        self.df[cols]=self.df[cols].apply(lambda x: np.exp(x))
+        self.df[self.cols]=self.df[self.cols].apply(lambda x: np.exp(x))
 
 
 
