@@ -154,3 +154,35 @@ class reverse_log(feature_transform):
 
 
 #%%
+#Part E
+import sklearn
+from sklearn.ensemble import RandomForestClassifier
+
+# Instantiate rf
+rf = RandomForestClassifier(max_depth=9, random_state=0)
+             
+# Fit rf to the training set    
+# rf.fit(X_train, y_train) 
+ 
+# Predict test set labels
+# y_pred = rf.predict(X_test)
+# modelselected=''
+class model:
+
+    def __init__(self,df,modelsel,x_cols,target,param_grid) -> None:
+        self._x_cols=x_cols
+        self._target=target
+        self._param_grid=param_grid
+        self.model=modelsel
+        self.train(df)
+
+    def train(self,df):
+        X_train=df[self._x_cols]
+        y_train=df[self._target]
+        self.model.fit(X_train, y_train) 
+        return None 
+
+    def predict(self,x_test):
+        return self.model.predict_proba(x_test[self._x_cols])
+
+
