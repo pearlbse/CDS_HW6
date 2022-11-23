@@ -107,4 +107,82 @@ class fill_nan:
             '''
             
             self.df[cols] = self.df[cols].fillna(self.df.mean().iloc[0])
-            
+
+
+#Part D
+# #%%
+
+# from sklearn.datasets import load_iris
+# import pandas as pd
+
+# data = load_iris()
+# df = pd.DataFrame(data=data.data, columns=data.feature_names)
+# df.head()
+# #%%
+# obj=StandardScaler()
+# df[['sepal length (cm)','petal width (cm)']].apply(lambda x:pd.DataFrame(obj.fit_transform(x).reshape(-1,1)))
+
+
+
+#%%
+from abc import ABC, abstractmethod
+import numpy
+from sklearn.preprocessing import StandardScaler 
+class feature_transform(ABC):
+
+    def __init__(self,df,cols:list) -> None:
+         self.df=df
+         self.cols=cols
+    
+    @abstractmethod
+    def apply_transform(self):
+        pass
+
+class log_transform(feature_transform):
+
+    def apply_transform(self):
+        self.df[cols]=self.df[cols].apply(lambda x: np.log(x))
+    
+class reverse_log(feature_transform):
+    def apply_transform(self):
+        obj=StandardScaler()
+        self.df[cols]=self.df[cols].apply(lambda x: np.exp(x))
+
+
+
+        
+
+
+#%%
+#Part E
+import sklearn
+from sklearn.ensemble import RandomForestClassifier
+
+# Instantiate rf
+rf = RandomForestClassifier(max_depth=9, random_state=0)
+             
+# Fit rf to the training set    
+# rf.fit(X_train, y_train) 
+ 
+# Predict test set labels
+# y_pred = rf.predict(X_test)
+# modelselected=''
+class model:
+
+    def __init__(self,df,modelsel,x_cols,target,param_grid) -> None:
+        self._x_cols=x_cols
+        self._target=target
+        self._param_grid=param_grid
+        self.model=modelsel
+        self.train(df)
+
+    def train(self,df):
+        X_train=df[self._x_cols]
+        y_train=df[self._target]
+        self.model.fit(X_train, y_train) 
+        return None 
+
+    def predict(self,x_test):
+        return self.model.predict_proba(x_test[self._x_cols])
+
+
