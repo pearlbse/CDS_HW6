@@ -136,7 +136,7 @@ class feature_transform(ABC):
     
     @abstractmethod
     def apply_transform(self):
-        pass
+        return NotImplementedError
 
 class log_transform(feature_transform):
 
