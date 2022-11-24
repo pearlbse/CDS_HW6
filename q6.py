@@ -53,6 +53,8 @@ class load_and_split:
         self.y = self.df["diabetes_mellitus"]
     
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size = 0.3, random_state = 2, stratify = self.y)
+        self.Train = self.X_train.join(self.y_train)
+        self.Test = self.X_test.join(self.y_test)
 
 # Part B
 
@@ -122,8 +124,6 @@ class fill_nan:
 # obj=StandardScaler()
 # df[['sepal length (cm)','petal width (cm)']].apply(lambda x:pd.DataFrame(obj.fit_transform(x).reshape(-1,1)))
 
-
-
 #%%
 from abc import ABC, abstractmethod
 import numpy
@@ -149,17 +149,19 @@ class reverse_log(feature_transform):
         self.df[self.cols]=self.df[self.cols].apply(lambda x: np.exp(x))
 
 
-
-        
-
-
 #%%
 #Part E
 import sklearn
 from sklearn.ensemble import RandomForestClassifier
 
 # Instantiate rf
-rf = RandomForestClassifier(max_depth=9, random_state=0)
+rf = RandomForestClassifier()
+hyperparams = {
+    'max_depth': 9,
+    'n_estimators': 15,
+    'min_samples_split': 3,
+    'random_state': 0
+}
              
 # Fit rf to the training set    
 # rf.fit(X_train, y_train) 
@@ -167,22 +169,24 @@ rf = RandomForestClassifier(max_depth=9, random_state=0)
 # Predict test set labels
 # y_pred = rf.predict(X_test)
 # modelselected=''
-class model:
+class model():
 
-    def __init__(self,df,modelsel,x_cols,target,param_grid) -> None:
+    def __init__(self,Train,modelsel,x_cols,target,hyperparams = None) -> None:
         self._x_cols=x_cols
         self._target=target
-        self._param_grid=param_grid
-        self.model=modelsel
-        self.train(df)
+        self._hyperparams=hyperparams
+        if hyperparams is None:
+            hyperparams = {}
+        self.model=modelsel(**self.hyperparams)
+        self.train(Train)
 
-    def train(self,df):
-        X_train=df[self._x_cols]
-        y_train=df[self._target]
-        self.model.fit(X_train, y_train) 
+    def train(self,Train):
+        X_train=Train[self._x_cols]
+        y_train=Train[self._target]
+        self.model_fit = self.model.fit(X_train, y_train) 
         return None 
 
-    def predict(self,x_test):
-        return self.model.predict_proba(x_test[self._x_cols])
-
+    def predict(self,Test):
+        X_test=Test[self._x_cols]
+        return self.model_fit.predict_proba(X_test[self._x_cols])
 
