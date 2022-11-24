@@ -24,7 +24,7 @@ setup(
     description='Learn how to use libraries with classes!',
     author='',
     packages=find_packages(where='classfunc', exclude=['tests']),
-    package_dir={'classfunc': 'classfunc'},
+    package_dir={'': 'classfunc'},
     install_requires=get_requirements(),
     setup_requires=['pytest-runner', 'wheel'],
     url='',
