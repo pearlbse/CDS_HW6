@@ -24,7 +24,7 @@ class model():
         self._hyperparams=hyperparams
         if hyperparams is None:
             hyperparams = {}
-        self.model=modelsel(**self.hyperparams)
+        self.model=modelsel(**self._hyperparams)
         self.train(Train)
 
     def train(self,Train):
