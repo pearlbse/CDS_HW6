@@ -12,32 +12,14 @@ class feature_transform(ABC):
         @abstractmethod
         def apply_transform(self):
             return NotImplementedError
-    
+
 class log_transform(feature_transform):
 
-    def __init__(self,df,cols:list) -> None:
-        self.df=df
-        self.cols=cols
-        self.apply_transform(self.cols)
-
-    def apply_transform(self, cols):
-        self.df.loc[:,self.cols]=self.df.loc[:,self.cols].apply(lambda x: np.log(x))
+        def apply_transform(self):
+            self.df.loc[:,self.cols]=self.df.loc[:,self.cols].apply(lambda x: np.log(x))
     
 class reverse_log(feature_transform):
 
-    def __init__(self,df,cols:list) -> None:
-        self.df=df
-        self.cols=cols
-        self.apply_transform(self.cols)
-         
-    def apply_transform(self,cols):
-        self.df.loc[:,self.cols]=self.df.loc[:,self.cols].apply(lambda x: np.exp(x))
+        def apply_transform(self):
+            self.df.loc[:,self.cols]=self.df.loc[:,self.cols].apply(lambda x: np.exp(x))
 
-class one_hot_encoding(feature_transform):
-
-    def __init__(self,df) -> None:
-        self.df=df
-        self.apply_transform(self.df)
-         
-    def apply_transform(self, df):
-        self.df = pd.get_dummies(df)
