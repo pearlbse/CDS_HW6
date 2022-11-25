@@ -23,3 +23,11 @@ class reverse_log(feature_transform):
         def apply_transform(self):
             self.df.loc[:,self.cols]=self.df.loc[:,self.cols].apply(lambda x: np.exp(x))
 
+class one_hot_encoding(feature_transform):
+
+    def __init__(self,df) -> None:
+        self.df=df
+        self.apply_transform(self.df)
+         
+    def apply_transform(self, df):
+        self.df = pd.get_dummies(df)
