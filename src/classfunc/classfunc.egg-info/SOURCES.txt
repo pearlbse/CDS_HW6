@@ -1,4 +1,10 @@
 setup.py
+classfunc/classfunc/__init__.py
+classfunc/classfunc/dropna.py
+classfunc/classfunc/meanfill.py
+classfunc/classfunc/model.py
+classfunc/classfunc/read_data.py
+classfunc/classfunc/transf.py
 classfunc/classfunc.egg-info/PKG-INFO
 classfunc/classfunc.egg-info/SOURCES.txt
 classfunc/classfunc.egg-info/dependency_links.txt
