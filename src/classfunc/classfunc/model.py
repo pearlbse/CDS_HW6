@@ -12,12 +12,6 @@ hyperparams = {
     'random_state': 0
 }
              
-# Fit rf to the training set    
-# rf.fit(X_train, y_train) 
- 
-# Predict test set labels
-# y_pred = rf.predict(X_test)
-# modelselected=''
 class model():
 
     def __init__(self,Train,modelsel,x_cols,target,hyperparams = {}) -> None:
@@ -51,3 +45,4 @@ class model():
         test_auc = roc_auc_score(self.y_test, self.test_proba)
         
         return test_auc    
+

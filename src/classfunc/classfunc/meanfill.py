@@ -22,5 +22,5 @@ class fill_nan:
                 df: dataframe with filled NaN in target columns
             '''
             
-            self.df.loc[:,cols].fillna(self.df.mean().iloc[0],inplace=True)
+            self.df.loc[:,cols] = self.df.loc[:,cols].fillna(self.df.mean())
 
