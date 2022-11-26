@@ -30,4 +30,8 @@ class model():
 
     def predict(self,Test):
         X_test=Test[self._x_cols]
+<<<<<<< HEAD
         return self.model.predict_proba(X_test[self._x_cols])
+=======
+        return self.model.predict_proba(X_test[self._x_cols])
+>>>>>>> main
