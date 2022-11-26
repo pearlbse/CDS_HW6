@@ -10,29 +10,24 @@ hyperparams = {
     'random_state': 0
 }
              
-# Fit rf to the training set    
-# rf.fit(X_train, y_train) 
- 
-# Predict test set labels
-# y_pred = rf.predict(X_test)
-# modelselected=''
 class model():
 
-    def __init__(self,Train,modelsel,x_cols,target,hyperparams = None) -> None:
+    def __init__(self,Train,modelsel,x_cols,target,hyperparams = {}) -> None:
         self._x_cols=x_cols
         self._target=target
         self._hyperparams=hyperparams
-        if hyperparams is None:
-            hyperparams = {}
-        self.model=modelsel(**self.hyperparams)
+        # if self._hyperparams is None:
+        #     self._hyperparams = {}
+        self.model=modelsel
+        self.model.set_params(**hyperparams)
         self.train(Train)
 
     def train(self,Train):
         X_train=Train[self._x_cols]
         y_train=Train[self._target]
-        self.model_fit = self.model.fit(X_train, y_train) 
+        self.model = self.model.fit(X_train, y_train) 
         return None 
 
     def predict(self,Test):
         X_test=Test[self._x_cols]
-        return self.model_fit.predict_proba(X_test[self._x_cols])
+        return self.model.predict_proba(X_test[self._x_cols])
